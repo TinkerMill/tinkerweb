@@ -1,4 +1,12 @@
 #################
+## TinkerWeb Specific
+#################
+
+## Ignore the Config File
+globals/config/config.php
+
+
+#################
 ## Eclipse
 #################
 
