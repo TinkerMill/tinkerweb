@@ -9,4 +9,14 @@
  * 
  * Last Modified: Sept. 28, 2013
  */
+
+
+// ------- MYSQL CONNECTION INFORMATION  -----------
+$SQLHOST = "localhost";     // mySQL Host (usually localhost)
+$SQLUSER = "username";      // mySQL Username
+$SQLPASS = "password";      // mySQL Password
+$SQLDB = "dbname";          // mySQL Database Name
+
+
+
 ?>

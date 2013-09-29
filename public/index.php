@@ -9,4 +9,9 @@
  * 
  * Last Modified: September 28th, 2013
  */
+
+// Connect to the MySql Database
+mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
+mysql_select_db($SQLDB);
+
 ?>
