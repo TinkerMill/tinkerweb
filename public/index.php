@@ -10,6 +10,9 @@
  * Last Modified: September 28th, 2013
  */
 
+// Initialize the Session
+session_start();
+
 // Connect to the MySql Database
 mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
 mysql_select_db($SQLDB);
