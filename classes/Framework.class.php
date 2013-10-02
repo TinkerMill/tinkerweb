@@ -16,7 +16,22 @@ class Framework {
         mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
         mysql_select_db($SQLDB);
         
+        // Determine the Page being requested
         
+    }
+    
+    function rootURL ()
+    {
+        if ($SSL == true)
+        {
+            $URL = "https://";
+        }
+        else
+        {
+            $URL = "http://";
+        }
+        $URL .= $_SERVER['HTTP_HOST'] . $DIRECTORY;
+        return $URL;
     }
 
 }

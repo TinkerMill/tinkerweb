@@ -17,6 +17,7 @@ $SQLUSER = "username";      // mySQL Username
 $SQLPASS = "password";      // mySQL Password
 $SQLDB = "dbname";          // mySQL Database Name
 
-
+// ------- SSL (HTTPS) Information ----------
+$SSL = false;     // true = https  ;  false = http
 
 ?>
