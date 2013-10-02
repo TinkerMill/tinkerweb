@@ -13,16 +13,8 @@
 // Initialize the Session
 session_start();
 
-// Require config.php (Secure website config info)
-require_once '../globals/config/config.php';
+include('../classes/Framework.class.php');
 
-// Require vars.php (Nonsecure Website Variables)
-require_once '../globals/config/vars.php';
-
-// Connect to the MySql Database
-mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
-mysql_select_db($SQLDB);
-
-
+new Framework();
 
 ?>
