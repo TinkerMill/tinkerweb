@@ -17,4 +17,7 @@ include('../classes/Framework.class.php');
 
 new Framework();
 
+
+echo Framework::rootURL();
+
 ?>

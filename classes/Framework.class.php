@@ -20,7 +20,7 @@ class Framework {
         
     }
     
-    function rootURL ()
+    public function rootURL ()
     {
         if ($SSL == true)
         {
@@ -30,7 +30,7 @@ class Framework {
         {
             $URL = "http://";
         }
-        $URL .= $_SERVER['HTTP_HOST'] . $DIRECTORY;
+        $URL .= $_SERVER['HTTP_HOST'] . $DIRECTORY . "/";
         return $URL;
     }
 
