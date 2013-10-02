@@ -7,7 +7,7 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: September 28th, 2013
+ * Last Modified: October 2nd, 2013 
  */
 
 // Initialize the Session
