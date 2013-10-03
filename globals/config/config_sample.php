@@ -18,7 +18,7 @@ $SQLPASS = "password";      // mySQL Password
 $SQLDB = "dbname";          // mySQL Database Name
 
 // ---------- SSL (HTTPS) Information ----------
-$SSL = false;     // true = https  ;  false = http
+define(SSL, false);     // true = https  ;  false = http
 
 // ---------- Features and URL Exceptions ----------
 /*

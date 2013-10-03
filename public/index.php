@@ -35,7 +35,7 @@ if (array_key_exists($urlExploded[1], $ClassExceptions)) {
   require("../classes/Gallery.class.php");
   new Gallery();
 } else {
-  // No Exceptions Exist, load the page according to the paramaters set
+  // No Exceptions Exist, Check if page exists in the database
 }
 
 ?>
