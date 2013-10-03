@@ -28,6 +28,7 @@ $url = "/";
 if ($_SERVER["REDIRECT_URL"] != "") {
   $url = $_SERVER["REDIRECT_URL"];
 }
+define(URL, $url);
 
 $urlExploded = explode("/", $url);
 if (array_key_exists($urlExploded[1], $ClassExceptions)) {

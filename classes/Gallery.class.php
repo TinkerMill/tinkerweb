@@ -19,9 +19,19 @@ class Gallery extends Framework{
     parent::loadHeader();
     
     // Determine what is being requested
+    if(URL == "/gallery/")
+    {
+      // Load the Default Gallery Page
+      $this->listEvents();
+    }
     
     // Load the Footer
     parent::loadFooter();
+  }
+  
+  public function listEvents(){
+    // Displays the List Events View
+    echo "This is the gallery where events will be listed.";
   }
 }
 
