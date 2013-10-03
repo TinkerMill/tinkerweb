@@ -33,8 +33,8 @@ define(URL, $url);
 $urlExploded = explode("/", $url);
 if (array_key_exists($urlExploded[1], $ClassExceptions)) {
   // An Exception Exists, load the Class for that Page
-  require("../classes/Gallery.class.php");
-  new Gallery();
+  require("../classes/" . $ClassExceptions[$urlExploded[1]] . ".class.php");
+  new $ClassExceptions[$urlExploded[1]]();
 } else {
   // No Exceptions Exist, Check if page exists in the database
 }
