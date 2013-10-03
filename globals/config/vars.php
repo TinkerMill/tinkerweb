@@ -10,6 +10,6 @@
  * Last Modified: Sept. 28, 2013
  */
 
-$SITETITLE = "Tinkermill";  // <title> Information will be displayed as "PageTitle - $SITETITLE"
+define(SITETITLE, "Tinkermill");  // <title> Information will be displayed as "PageTitle - $SITETITLE"
 
 ?>

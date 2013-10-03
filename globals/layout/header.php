@@ -10,3 +10,13 @@
  */
 
 ?>
+
+<html>
+  
+  <head>
+    
+    <title><?php echo SITETITLE; ?></title>
+    
+  </head>
+  
+  <body>
