@@ -4,11 +4,13 @@ require_once("Framework.class.php");
 
 class Gallery extends Framework{
   public function __construct(){
-    $this->yayme();
-  }
-  public function yayme(){
-    echo "Yay Me!!!<br />";
-    echo $this->rootURL();
+    // Load the Website's Header
+    parent::loadHeader();
+    
+    // Determine what is being requested
+    
+    // Load the Footer
+    parent::loadFooter();
   }
 }
 
