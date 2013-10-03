@@ -5,19 +5,37 @@
  * This file will be the first file served,
  *      the .htaccess file will also force all incoming requests through this file
  * 
+ * This file will:
+ * 1.) Determine the Requested URL
+ * 2.) Get the Requested URL from the database &
+ * 3.) Determine What needs to get loaded
+ * 4.) Load the Page
+ * 
  * @author Cody B. Daig
  * 
  * Last Modified: October 2nd, 2013 
  */
 
-// Initialize the Session
-session_start();
+// Require the Config and Vars files
+require_once("../globals/config/config.php");
+require_once("../globals/config/vars.php");
 
-include('../classes/Framework.class.php');
+// Load the Database
+mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
+mysql_select_db($SQLDB);
 
-new Framework();
+$url = "/";
+if ($_SERVER["REDIRECT_URL"] != "") {
+  $url = $_SERVER["REDIRECT_URL"];
+}
 
-
-echo Framework::rootURL();
+$urlExploded = explode("/", $url);
+if (array_key_exists($urlExploded[1], $ClassExceptions)) {
+  // An Exception Exists, load the Class for that Page
+  require("../classes/Gallery.class.php");
+  new Gallery();
+} else {
+  // No Exceptions Exist, load the page according to the paramaters set
+}
 
 ?>
