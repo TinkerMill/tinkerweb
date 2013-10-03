@@ -7,7 +7,7 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: Sept. 28, 2013
+ * Last Modified: October 2nd, 2013
  */
 
 
@@ -29,6 +29,6 @@ define(SSL, false);     // true = https  ;  false = http
  *    ie. the Gallery class value would be Gallery
  *        the class would be in the Gallery.class.php file in the classes folder
  */
-$ClassExceptions = array("gallery" => "Gallery", "blog" => "Blog", "forum" => "Forum");
+$ClassExceptions = array("gallery" => "Gallery", "blog" => "Blog", "forum" => "Forum", "wiki" => "Wiki", "calendar" => "Calendar", "equipment" => "Equipment");
 
 ?>
