@@ -1,0 +1,8 @@
+To Install / Use this on your server:
+
+1. Upload the files to your webserver.
+2. In your web server settings, point the directory to "server" to the public folder. 
+3. Rename the globals/config.sample.php file to config.php.
+  a. Open config.php with your favorite editor and follow the instructions in the file.
+4. Rename the globals/vars.sample.php file to vars.php.
+  a. Open the vars.php file with your favorite editor and fill out any variables you would like to change.
