@@ -11,6 +11,7 @@
 
 ?>
 </div>
+</div>
 
 <div id="footer">
       <div class="container">
