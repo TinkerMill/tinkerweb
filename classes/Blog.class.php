@@ -12,31 +12,36 @@
 // Include the Parent Framework Class
 require_once("Framework.class.php");
 
-class Blog extends Framework{
-  public function __construct(){
-    // Load the Website's Header
-    parent::loadHeader();
-    
-    // Determine what is being requested
-    if(URL == "/blog/")
-    {
-      // Load the Default Blog Page
-      $this->listPosts();
+class Blog extends Framework {
+
+  public function __construct() {
+    if (BACKEND_ENABLED == true) {
+      echo "LOADING THE BLOG's BACKEND CLASS";
+    } else {
+      // Load the Website's Header
+      parent::loadHeader();
+
+      // Determine what is being requested
+      if (URL == "/blog/") {
+        // Load the Default Blog Page
+        $this->listPosts();
+      }
+
+      // Load the Footer
+      parent::loadFooter();
     }
-    
-    // Load the Footer
-    parent::loadFooter();
   }
-  
-  public function constructBackend(){
-  
+
+  public function constructBackend() {
+
     echo "This is where the backend Blog will appear.";
   }
-  
-  public function listPosts(){
+
+  public function listPosts() {
     // Displays the List Events View
     echo "This is where blog posts will be listed.";
   }
+
 }
 
 ?>
