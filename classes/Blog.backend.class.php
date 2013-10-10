@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Backend Class
+ * Blog Class
  * This file will ... 
  * 
  * @author Cody B. Daig
@@ -12,16 +12,25 @@
 // Include the Parent Framework Class
 require_once("Framework.class.php");
 
-class Backend extends Framework{
+class Blog extends Framework{
   public function __construct(){
+    // Load the Website's Header
+    parent::loadHeader();
+    
     // Determine what is being requested
+    if(URL == "/blog/")
+    {
       // Load the Default Blog Page
-      $this->displayBackend();
+      $this->listPosts();
+    }
+    
+    // Load the Footer
+    parent::loadFooter();
   }
   
-  public function displayBackend(){
+  public function listPosts(){
     // Displays the List Events View
-    echo "This is where backend will be displayed.";
+    echo "This is where blog posts will be listed.";
   }
 }
 
