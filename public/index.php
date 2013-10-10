@@ -49,6 +49,7 @@ if (array_key_exists($urlExploded[1], $ClassExceptions)) {
   {
     // Page Not Found
     // Display 404
+    echo "<p>Whoa...... This page, like, doesn't exist anymore.</p>";
   }
 }
 
