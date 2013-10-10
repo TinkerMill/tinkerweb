@@ -42,8 +42,8 @@ if($urlExploded[1] == BACKEND)
   else
   {
     // Load the Default backend
-  require("../classes/Backend.class.php");
-  new Backend();
+  require("../classes/Framework.class.php");
+  new Framework();
   }
 }
 else if (array_key_exists($urlExploded[1], $ClassExceptions)) {

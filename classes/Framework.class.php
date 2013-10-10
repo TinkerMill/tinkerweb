@@ -57,6 +57,21 @@ class Framework {
     $URL .= $_SERVER['HTTP_HOST'] . $DIRECTORY . "/";
     return $URL;
   }
+  
+  
+  
+  
+  
+  public function constructBackend(){
+    // Determine what is being requested
+      // Load the Default Blog Page
+      $this->displayBackend();
+  }
+  
+  public function displayBackend(){
+    // Displays the List Events View
+    echo "This is where backend will be displayed.";
+  }
 
 }
 

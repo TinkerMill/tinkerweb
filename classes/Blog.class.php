@@ -28,6 +28,11 @@ class Blog extends Framework{
     parent::loadFooter();
   }
   
+  public function constructBackend(){
+  
+    echo "This is where the backend Blog will appear.";
+  }
+  
   public function listPosts(){
     // Displays the List Events View
     echo "This is where blog posts will be listed.";
