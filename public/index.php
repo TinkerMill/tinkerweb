@@ -24,16 +24,20 @@ require_once("../globals/config/vars.php");
 mysql_connect($SQLHOST, $SQLUSER, $SQLPASS);
 mysql_select_db($SQLDB);
 
+// Get the Requested URL
 $url = "/";
 if ($_SERVER["REDIRECT_URL"] != "") {
   $url = $_SERVER["REDIRECT_URL"];
 }
 define(URL, $url);
 
+// Determine what is being requested
 $urlExploded = explode("/", $url);
 if ($urlExploded[1] == BACKEND) {
-  // Load the Default backend
+  // Set Backend to True
   define(BACKEND_ENABLED, true);
+  // Determine if a specific backend class is being requested
+  // If not, load the generic Backend Page
   if (!array_key_exists($urlExploded[2], $ClassExceptions)) {
     require("../classes/Framework.class.php");
     new Framework();
