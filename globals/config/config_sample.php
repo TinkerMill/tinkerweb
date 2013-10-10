@@ -31,4 +31,17 @@ define(SSL, false);     // true = https  ;  false = http
  */
 $ClassExceptions = array("gallery" => "Gallery", "blog" => "Blog", "forum" => "Forum", "wiki" => "Wiki", "calendar" => "Calendar", "equipment" => "Equipment");
 
+// --------- BACKEND (Administration Panel) ----------
+/*
+ * Give your backend a url-slug that is unique to your website
+ *    ie. admin-man, admin, backend, yo-bro-admin-man-sir
+ * DO NOT USE CAPITALS, MUST BE LOWERCASE!!
+ * 
+ * Each class is assumed to have a backend panel. 
+ * So, all classes defined above, are assumed to have at least one backend page.
+ * Accessed as such:  www.example.com/backend-slug/gallery/
+ *    The above example will call the Backend Page for the Gallery Class
+ */
+define(BACKEND, "backend");
+
 ?>
