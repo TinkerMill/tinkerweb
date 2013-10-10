@@ -13,7 +13,7 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 2nd, 2013 
+ * Last Modified: October 9th, 2013 
  */
 
 // Require the Config and Vars files
@@ -36,7 +36,20 @@ if (array_key_exists($urlExploded[1], $ClassExceptions)) {
   require("../classes/" . $ClassExceptions[$urlExploded[1]] . ".class.php");
   new $ClassExceptions[$urlExploded[1]]();
 } else {
-  // No Exceptions Exist, Check if page exists in the database
+  // No Exceptions Exist, Check if page exists in the database 
+  $sql = "SELECT * FROM `pages` WHERE `path`='" . $url . "'";
+  $page = mysql_query($sql);
+  if(mysql_num_rows($page) > 0)
+  {
+    // The Page Exists in the Database - Load the Page Accordingly
+    require_once '../classes/Framework.class.php';
+    new Framework($page);
+  }
+  else
+  {
+    // Page Not Found
+    // Display 404
+  }
 }
 
 ?>

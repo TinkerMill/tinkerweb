@@ -7,14 +7,34 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 2nd, 2013 
+ * Last Modified: October 9th, 2013 
  */
 
 class Framework {
 
   // __construct
   // Loads the Core Framework
-  public function __construct() {
+  public function __construct($page) {
+    // This __construct() class loads a standard page.
+    // Load the Header
+    $this->loadHeader();
+    
+    // Load the Content
+    if(mysql_result($page, 0, "type") == "page")
+    {
+      include(mysql_result($page, 0, "page"));
+    }
+    else if(mysql_result($page, 0, "type") == "content")
+    {
+      print mysql_result($page, 0, "content");
+    }
+    else
+    {
+      print "An error has occured";
+    }
+    
+    // Load the Footer
+    $this->loadFooter();
   }
   
   public function loadHeader(){
