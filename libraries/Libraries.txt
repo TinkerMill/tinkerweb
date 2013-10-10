@@ -2,3 +2,9 @@
 
 // The Following Libraries are being included:
 //     (please include the name, source url, purpose/usage, and version
+
+// ---------- Twitter Bootstrap ----------
+// We are using Twitter Bootstrap 3.0.0 - compatiable with 3.x.x
+// Imported on: Oct. 10th, 2013 by Cody B. Daig
+// Files MUST be kept in the public/bootstrap folder
+    // (because the files must be publically accessible)// // www.getbotstrap.com
