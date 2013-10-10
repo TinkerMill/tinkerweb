@@ -16,7 +16,7 @@ class Blog extends Framework {
 
   public function __construct() {
     if (BACKEND_ENABLED == true) {
-      echo "LOADING THE BLOG's BACKEND CLASS";
+      $this->constructBackend();
     } else {
       // Load the Website's Header
       parent::loadHeader();
@@ -32,14 +32,13 @@ class Blog extends Framework {
     }
   }
 
-  public function constructBackend() {
-
-    echo "This is where the backend Blog will appear.";
-  }
-
   public function listPosts() {
     // Displays the List Events View
     echo "This is where blog posts will be listed.";
+  }
+  
+  public function constructBackend() {
+    echo "This is where the backend Blog will appear.";
   }
 
 }
