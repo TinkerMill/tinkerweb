@@ -31,7 +31,13 @@ if ($_SERVER["REDIRECT_URL"] != "") {
 define(URL, $url);
 
 $urlExploded = explode("/", $url);
-if (array_key_exists($urlExploded[1], $ClassExceptions)) {
+if($urlExploded[1] == BACKEND && array_key_exists($urlExploded[3], $ClassExceptions))
+{
+  // Call the Backend Page of the Requested Class
+  require("../classes/Backend.class.php");
+  new Backend();
+}
+else if (array_key_exists($urlExploded[1], $ClassExceptions)) {
   // An Exception Exists, load the Class for that Page
   require("../classes/" . $ClassExceptions[$urlExploded[1]] . ".class.php");
   new $ClassExceptions[$urlExploded[1]]();
