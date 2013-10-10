@@ -31,41 +31,42 @@ if ($_SERVER["REDIRECT_URL"] != "") {
 define(URL, $url);
 
 $urlExploded = explode("/", $url);
-if($urlExploded[1] == BACKEND)
+if ($urlExploded[1] == BACKEND) {
+  // Load the Default backend
+  define(BACKEND_ENABLED, true);
+  if (!array_key_exists($urlExploded[2], $ClassExceptions)) {
+    require("../classes/Framework.class.php");
+    new Framework();
+  }
+}
+else
 {
-  // Determine if a Specific Class' backend is being requested
-  if (array_key_exists($urlExploded[2], $ClassExceptions)) {
-    require("../classes/" . $ClassExceptions[$urlExploded[2]] . ".backend.class.php");
-    $className = "Backend" . $ClassExceptions[$urlExploded[2]];
-    new $className();
+  define(BACKEND_ENABLED, false);
+}
+if (array_key_exists($urlExploded[1], $ClassExceptions) || ($urlExploded[1] == BACKEND && array_key_exists($urlExploded[2], $ClassExceptions))) {
+  // An Exception Exists, load the Class for that Page
+  if(BACKEND_ENABLED == true)
+  {
+    $className = $ClassExceptions[$urlExploded[2]];
   }
   else
   {
-    // Load the Default backend
-  require("../classes/Framework.class.php");
-  new Framework();
+    $className = $ClassExceptions[$urlExploded[1]];
   }
-}
-else if (array_key_exists($urlExploded[1], $ClassExceptions)) {
-  // An Exception Exists, load the Class for that Page
-  require("../classes/" . $ClassExceptions[$urlExploded[1]] . ".class.php");
-  new $ClassExceptions[$urlExploded[1]]();
+  require("../classes/" . $className . ".class.php");
+  new $className();
 } else {
   // No Exceptions Exist, Check if page exists in the database 
   $sql = "SELECT * FROM `pages` WHERE `path`='" . $url . "'";
   $page = mysql_query($sql);
-  if(mysql_num_rows($page) > 0)
-  {
+  if (mysql_num_rows($page) > 0) {
     // The Page Exists in the Database - Load the Page Accordingly
     require_once '../classes/Framework.class.php';
     new Framework($page);
-  }
-  else
-  {
+  } else {
     // Page Not Found
     // Display 404
     echo "<p>Whoa...... This page, like, doesn't exist anymore.</p>";
   }
 }
-
 ?>
