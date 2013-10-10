@@ -37,14 +37,17 @@ class Framework {
     $this->loadFooter();
   }
   
+  // Loads the Header
   public function loadHeader(){
     include_once('../globals/layout/header.php');
   }
   
+  // Loads the Footer
   public function loadFooter(){
     include_once('../globals/layout/footer.php');
   }
-
+  
+  // Returns the URL
   public function rootURL() {
     if (SSL == true) {
       $URL = "https://";
