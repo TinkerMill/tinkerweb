@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This is the Framework Class
  * This class will be the core functionality of the entire website
@@ -11,6 +10,7 @@
  */
 
 class Framework {
+  public $user = array();
 
   // __construct
   // Loads the Core Framework
@@ -42,6 +42,11 @@ class Framework {
   public function loadFooter() {
     include_once('../globals/layout/footer.php');
   }
+  
+  public function getUser(){
+    GLOBAL $user;
+    return $user;
+  }
 
   // Display the Jumbotron Template Page with Content
   public function template_jumbotron($page) {
@@ -72,8 +77,20 @@ class Framework {
     echo '</div>';
   }
 
-  // Returns the URL
+  // Returns the Home URL (ie. https://www.tinkermill.org)
+
   public function rootURL() {
+    if (SSL == true) {
+      $URL = "https://";
+    } else {
+      $URL = "http://";
+    }
+    $URL .= $_SERVER['HTTP_HOST'];
+    return $URL;
+  }
+
+  // Returns the rootURL (the url the user is sitting at)
+  public function currentURL() {
     if (SSL == true) {
       $URL = "https://";
     } else {
@@ -94,6 +111,71 @@ class Framework {
     echo "This is where backend will be displayed.";
   }
 
-}
+  public function encryptpassword($str) {
+    $salt_one = "0123456789abcdefghijklmnopqrstuvwxyz!^#@*&(%)$";
+    $salt_two = "@#$@$%&#$@#$%@SDFGW#KGSDOEKSDFGAWO#@)^wergsd";
+    $pwd = md5($salt_one);
+    $pwd .= md5($str);
+    $pwd .= md5($salt_two);
+    $pwd = sha1($pwd);
+    return $pwd;
+  }
 
+  public function makeHash() {
+    $ua = str_replace(' ', '', strtolower($_SERVER['HTTP_USER_AGENT']));
+    $ri = $_SERVER['REMOTE_ADDR'];
+    $rand = bin2hex(openssl_random_pseudo_bytes(rand(5, 20)));
+    $hash = $ua . $rand . $ri;
+    return substr($hash, 0, 255);
+  }
+
+  public function setLoginCookie($user) {
+    $hash = $this->makeHash();
+    setcookie(SITETITLE . "_login", $hash, time() + 86400, "/");
+
+    $sql = "UPDATE `users` SET `Hash` = '" . $hash . "' WHERE `Email` = '" . $user . "'";
+    mysql_query($sql);
+  }
+
+  public function isUserLoggedIn() {
+    $cookieName = SITETITLE . "_login";
+    if (isset($_COOKIE[$cookieName])) {
+      $hash = $_COOKIE[$cookieName];
+      $sql = "SELECT * FROM `users` WHERE `hash`='" . $hash . "'";
+      $result = mysql_query($sql);
+
+      if (mysql_num_rows($result) > 0) {
+        $user_temp = mysql_fetch_array($result);
+        GLOBAL $user;
+        $user = $user_temp;
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  public function LogIn($user, $pass) {
+    $password = $this->encryptpassword($pass);
+
+    $Spass = "SELECT `Password`,`Username`, `Position` FROM `users` WHERE `Email`='" . $user . "'";
+    $Opass = mysql_query($Spass);
+
+    if ($password == mysql_result($Opass, 0, "Password") && mysql_result($Opass, 0, "Position") != "DISABLED") {
+      // Set the Login Cookie
+      $this->setLoginCookie($user);
+      echo "<div class='alert alert-success'>Logged In Successfully!</div>";
+      ?> <script>location.assign("<?php echo $this->rootURL(); ?>");</script> <?php 
+    } else if (mysql_result($Opass, 0, "Position") == "DISABLED") {
+      echo "<div class='alert alert-danger'>Account Disabled. Contact the Webmaster @ info@tinkermill.org</div>";
+    } else {
+      echo "<div class='alert alert-danger'>Login Failed. Incorrect Username/Password</div>";
+    }
+
+    echo "<br /><br />";
+  }
+
+}
 ?>
