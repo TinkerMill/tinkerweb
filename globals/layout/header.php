@@ -9,6 +9,8 @@
  */
 
 ob_start();
+
+$user = $this->getUser();
 ?>
 
 <!DOCTYPE html>
@@ -55,52 +57,33 @@ ob_start();
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="/"><?php echo SITETITLE; ?></a>
           </div>
           <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+            <ul class="nav navbar-nav navbar-left">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="/">Calendar</a></li>
+              <li><a href="/">Forum</a></li>
+              <li><a href="/">Blog</a></li>
+              <li><a href="/">Wiki</a></li>
+              <li><a href="/">Gallery</a></li>
+              <li><a href="/">Equipment</a></li>
+              <li><a href="/">Membership</a></li>
+              <li><a href="/">About</a></li>
             </ul>
-<?php
-if ($this->isUserLoggedIn()) {
-  echo "You Are Logged In!";
-} else {
-  ?>
-              <form id="topbarLogin" class="navbar-form navbar-right" method="post" action="/login/">
-                <div class="form-group">
-                  <input type="email" placeholder="Email" name="email" class="form-control" required />
-                </div>
-                <div class="form-group">
-                  <input type="password" placeholder="Password" name="password" class="form-control" required />
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-              </form> <?php } ?>
+            <ul class="nav navbar-nav navbar-right">
+            <?php
+            if ($this->isUserLoggedIn()) { ?>
+              <li><a href="#">Cody B. Daig</a></li>
+            <?php } else {
+              ?>
+              <li><a href="/login/">Please Login!</a></li>
+            </ul>
+            <?php } ?>
           </div><!--/.navbar-collapse -->
         </div>
       </div>
 
-      <script>
-        $("#topbarLogin").validate({
-          submitHandler: function(form) {
-            // do other things for a valid form
-            form.submit();
-          }
-        });
-      </script>
 
       <!-- Begin page content -->
       <div class="container">
