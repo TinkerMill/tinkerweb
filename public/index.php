@@ -61,8 +61,9 @@ if (array_key_exists($urlExploded[1], $ClassExceptions) || ($urlExploded[1] == B
   new $className();
 } else {
   // No Exceptions Exist, Check if page exists in the database 
-  $sql = "SELECT * FROM `pages` WHERE `path`='" . $url . "'";
+  $sql = "SELECT `pages`.*, `page_templates`.`ClassName` FROM `pages` LEFT JOIN `page_templates` ON `pages`.`template`=`page_templates`.`ID` WHERE `path`='" . $url . "'";
   $page = mysql_query($sql);
+  echo mysql_error();
   if (mysql_num_rows($page) > 0) {
     // The Page Exists in the Database - Load the Page Accordingly
     require_once '../classes/Framework.class.php';
