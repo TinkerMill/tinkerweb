@@ -22,7 +22,7 @@
 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://dev.tinkermill.org/bootstrap/assets/js/jquery.js"></script>
+    
     <script src="http://dev.tinkermill.org/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>

@@ -28,6 +28,11 @@
     <!-- Custom styles for this template -->
     <link href="http://dev.tinkermill.org/css/site.css" rel="stylesheet">
     
+    <script src="http://dev.tinkermill.org/bootstrap/assets/js/jquery.js"></script>
+    
+    <!-- jQuery Validate 1.11.1 -->
+    <script src="http://dev.tinkermill.org/jqueryvalidation/dist/jquery.validate.js"></script>
+    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -70,18 +75,27 @@
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <form id="topbarLogin" class="navbar-form navbar-right" method="get" action="/login/">
             <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
+              <input type="email" placeholder="Email" class="form-control" required />
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
+              <input type="password" placeholder="Password" class="form-control" required />
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
+      
+      <script>
+$("#topbarLogin").validatee({
+  submitHandler: function(form) {
+    // do other things for a valid form
+    form.submit();
+  }
+});
+</script>
 
       <!-- Begin page content -->
       <div class="container">
