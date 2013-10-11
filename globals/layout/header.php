@@ -64,7 +64,7 @@ $user = $this->getUser();
               <li class="active"><a href="/">Home</a></li>
               <li><a href="/">Calendar</a></li>
               <li><a href="/">Forum</a></li>
-              <li><a href="/">Blog</a></li>
+              <li><a href="/blog/">Blog</a></li>
               <li><a href="/">Wiki</a></li>
               <li><a href="/">Gallery</a></li>
               <li><a href="/">Equipment</a></li>
