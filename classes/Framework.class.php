@@ -37,6 +37,11 @@ class Framework {
   public function loadHeader() {
     include_once('../globals/layout/header.php');
   }
+  
+  // Loads the Backend Header
+  public function loadBackendHeader(){
+      include_once("../globals/layout/backend_header.php");
+  }
 
   // Loads the Footer
   public function loadFooter() {

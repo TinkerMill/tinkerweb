@@ -25,6 +25,11 @@ class Blog extends Framework {
                 // Load the Default Blog Page
                 $this->listPosts();
             }
+            else
+            {
+                // Whoa... Something hapened
+                echo "Ths page you requested is not a valid page.";
+            }
 
             // Load the Footer
             parent::loadFooter();
@@ -56,6 +61,7 @@ class Blog extends Framework {
     }
 
     public function constructBackend() {
+        $this->loadBackendHeader();
         echo "This is where the backend Blog will appear.";
     }
 
