@@ -62,7 +62,7 @@ class Blog extends Framework {
 
     public function constructBackend() {
         $this->loadBackendHeader();
-        echo "This is where the backend Blog will appear.";
+        echo "<h1>This is where the backend Blog will appear.</h1>";
     }
 
 }

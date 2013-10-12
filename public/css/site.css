@@ -64,6 +64,10 @@ body {
   border-top-right-radius: 0;
 }
 
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+  display: block;
+}
+
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
