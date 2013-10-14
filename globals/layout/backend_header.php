@@ -1,16 +1,17 @@
 <?php
 /*
- * header.php file
- * This file will load the page until page specific content starts
+ * backend_header.php file
+ * This file will load the backend page until page specific content starts
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 10th, 2013 
+ * Last Modified: October 14th, 2013 
  */
 
 ob_start();
 
-$user = $this->getUser();
+GLOBAL $user;
+
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +78,7 @@ $user = $this->getUser();
             </ul>
               <ul class="nav navbar-nav navbar-right">
                 <?php if ($this->isUserLoggedIn()) { ?>
-                  <li><a href="#">Cody B. Daig</a></li>
+                  <li><a href="#"><?php echo $user["Firstname"] . " " . $user["Lastname"]; ?></a></li>
                 <?php } else {
                   ?>
                   <li><a href="/login/">Please Login!</a></li>

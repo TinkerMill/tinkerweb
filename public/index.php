@@ -55,7 +55,6 @@ else
 
 $sql .= "'";
 $result = mysql_query($sql);
-echo $sql;
 $page = mysql_fetch_array($result);
 
 if (mysql_num_rows($result) > 0) {

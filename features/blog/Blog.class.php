@@ -12,7 +12,7 @@
 require_once("../classes/Framework.class.php");
 
 class Blog extends Framework {
-  
+
   public $name = "Blog";
 
   public function __construct() {
@@ -64,19 +64,17 @@ class Blog extends Framework {
     GLOBAL $user;
     GLOBAL $name;
     $id = $user["ID"];
-    if (parent::hasPermission($id, $name)) {
-      $this->loadBackendHeader();
-      echo "<h1>This is where the backend Blog will appear.</h1>";
-      echo "<p>You ";
-      if (parent::featureHasPermission("1", "Blog", "NewPost")) {
-        echo "have";
-      } else {
-        echo "don't have";
-      }
-      echo " permission to this feature";
-    } else {
-      // Permission Denied
-      echo "<h1>Permission Denied</h1>";
+    $url = str_replace("/" . BACKEND, "", URL);
+
+    // Load the Backend Header
+    include_once("../globals/layout/backend_header.php");
+    
+    // Determine Requested Page
+    if ($url == "/blog/") {
+      // Load the Default Page
+      echo "<h1>Congrats! Your a Blog Admin.</h1>";
+    } else if ($url == "/blog/new/") {
+      echo "<h1>Your Creating a New Blog Post.</h1>";
     }
   }
 

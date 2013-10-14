@@ -11,7 +11,7 @@
 if($this->isUserLoggedIn())
 {
   ?> <script>location.assign("<?php echo $this->rootURL(); ?>");</script> <?php
-  break;
+  die();
 }
 
 if($_POST["email"] != "" && $_POST["password"] != "")
