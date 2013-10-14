@@ -53,13 +53,17 @@ class Framework {
     GLOBAL $user;
     return $user;
   }
+  public function getUserID(){
+    GLOBAL $user;
+    return $user["ID"];
+  }
 
   // Check's to see if a User Has Permission
   // Variables:
   //  $user = user ID
-  //  $level = permission ID
+  //  $level = permission Name
   public function hasPermission($user, $level) {
-    $sql = "SELECT * FROM `permission_access` WHERE `uID`='" . $user . "' AND `pID`='" . $level . "'";
+    $sql = "SELECT * FROM `permission_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`Name` WHERE `permissions_access`.`uID`='" . $user . "' AND `permissions`.`Name`='" . $level . "'";
   }
 
   // Display the Jumbotron Template Page with Content

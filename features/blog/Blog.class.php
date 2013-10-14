@@ -9,9 +9,11 @@
  */
 
 // Include the Parent Framework Class
-require_once("Framework.class.php");
+require_once("../classes/Framework.class.php");
 
 class Blog extends Framework {
+  
+  public $name = "Blog";
 
   public function __construct() {
     if (BACKEND_ENABLED == true) {
@@ -60,8 +62,9 @@ class Blog extends Framework {
 
   public function constructBackend() {
     GLOBAL $user;
+    GLOBAL $name;
     $id = $user["ID"];
-    if (parent::hasPermission($id, $level)) {
+    if (parent::hasPermission($id, $name)) {
       $this->loadBackendHeader();
       echo "<h1>This is where the backend Blog will appear.</h1>";
       echo "<p>You ";

@@ -31,34 +31,36 @@ if ($_SERVER["REDIRECT_URL"] != "") {
 }
 define(URL, $url);
 
+// Start the SQL statement
+$sql = "SELECT * FROM `features` WHERE `slug`='";
+
 // Determine if the backend is being requested
 $urlExploded = explode("/", $url);
 if ($urlExploded[1] == BACKEND) {
   // Set Backend to True
   define(BACKEND_ENABLED, true);
+  $sql .= $urlExploded[2];
   // Determine if a specific backend class is being requested
   // If not, load the generic Backend Page
-  if (!array_key_exists($urlExploded[2], $ClassExceptions)) {
+  /*if (!array_key_exists($urlExploded[2], $ClassExceptions)) {
     require("../classes/Framework.class.php");
     new Framework();
-  }
+  }*/
 }
 else
 {
   define(BACKEND_ENABLED, false);
+  $sql .= $urlExploded[1];
 }
-if (array_key_exists($urlExploded[1], $ClassExceptions) || ($urlExploded[1] == BACKEND && array_key_exists($urlExploded[2], $ClassExceptions))) {
-  // An Exception Exists, load the Class for that Page
-  if(BACKEND_ENABLED == true)
-  {
-    $className = $ClassExceptions[$urlExploded[2]];
-  }
-  else
-  {
-    $className = $ClassExceptions[$urlExploded[1]];
-  }
-  require("../classes/" . $className . ".class.php");
-  new $className();
+
+$sql .= "'";
+$result = mysql_query($sql);
+echo $sql;
+$page = mysql_fetch_array($result);
+
+if (mysql_num_rows($result) > 0) {
+  require("../" . $page["ClassFile"]);
+  new $page["ClassName"]();
 } else {
   // No Exceptions Exist, Check if page exists in the database 
   $sql = "SELECT `pages`.*, `page_templates`.`ClassName` FROM `pages` LEFT JOIN `page_templates` ON `pages`.`template`=`page_templates`.`ID` WHERE `path`='" . $url . "'";
