@@ -10,6 +10,7 @@
  */
 
 class Framework {
+
   public $user = array();
 
   // __construct
@@ -37,24 +38,28 @@ class Framework {
   public function loadHeader() {
     include_once('../globals/layout/header.php');
   }
-  
+
   // Loads the Backend Header
-  public function loadBackendHeader(){
-      include_once("../globals/layout/backend_header.php");
+  public function loadBackendHeader() {
+    include_once("../globals/layout/backend_header.php");
   }
 
   // Loads the Footer
   public function loadFooter() {
     include_once('../globals/layout/footer.php');
   }
-  
-  public function getUser(){
+
+  public function getUser() {
     GLOBAL $user;
     return $user;
   }
-  
-  public function hasPermission($user, $level){
-    return true;
+
+  // Check's to see if a User Has Permission
+  // Variables:
+  //  $user = user ID
+  //  $level = permission ID
+  public function hasPermission($user, $level) {
+    $sql = "SELECT * FROM `permission_access` WHERE `uID`='" . $user . "' AND `pID`='" . $level . "'";
   }
 
   // Display the Jumbotron Template Page with Content
@@ -176,7 +181,7 @@ class Framework {
       // Set the Login Cookie
       $this->setLoginCookie($user);
       echo "<div class='alert alert-success'>Logged In Successfully!</div>";
-      ?> <script>location.assign("<?php echo $this->rootURL(); ?>");</script> <?php 
+      ?> <script>location.assign("<?php echo $this->rootURL(); ?>");</script> <?php
     } else if (mysql_result($Opass, 0, "Position") == "DISABLED") {
       echo "<div class='alert alert-danger'>Account Disabled. Contact the Webmaster @ info@tinkermill.org</div>";
     } else {
@@ -186,18 +191,20 @@ class Framework {
     echo "<br /><br />";
   }
   
-  public function featureHasPermission($userID, $feature, $permission){
-      $sql = "SELECT * FROM `permissions_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`ID` INNER JOIN `features` ON `permissions`.`featureID`=`features`.`ID` WHERE `feature`.`Name`='" . $feature . "'";
-      $result = mysql_query($sql);
-      
-      if(mysql_num_rows($result) > 0)
-      {
-          return true;
-      }
-      else{
-          return false;
-      }
-      
+  // Seeing If User Had Permission
+  // Variables : 
+  //    $userID = The User's ID
+  //    $featureID = the feature Name
+  //    $permission = the feature permission name
+  public function featureHasPermission($userID, $feature, $permission) {
+    $sql = "SELECT * FROM `permissions_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`ID` INNER JOIN `features` ON `permissions`.`featureID`=`features`.`ID` WHERE `features`.`Name`='" . $feature . "' AND `permissions_access`.`uID`='" . $userID . "' AND `permissions`.`featurePname`='" . $permission . "'";
+    $result = mysql_query($sql);
+
+    if (mysql_num_rows($result) > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

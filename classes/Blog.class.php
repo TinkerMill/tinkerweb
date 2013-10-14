@@ -64,8 +64,16 @@ class Blog extends Framework {
     if (parent::hasPermission($id, $level)) {
       $this->loadBackendHeader();
       echo "<h1>This is where the backend Blog will appear.</h1>";
+      echo "<p>You ";
+      if (parent::featureHasPermission("1", "Blog", "NewPost")) {
+        echo "have";
+      } else {
+        echo "don't have";
+      }
+      echo " permission to this feature";
     } else {
       // Permission Denied
+      echo "<h1>Permission Denied</h1>";
     }
   }
 
