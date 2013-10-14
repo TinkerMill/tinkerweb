@@ -181,6 +181,20 @@ class Framework {
 
     echo "<br /><br />";
   }
+  
+  public function featureHasPermission($userID, $feature, $permission){
+      $sql = "SELECT * FROM `permissions_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`ID` INNER JOIN `features` ON `permissions`.`featureID`=`features`.`ID` WHERE `feature`.`Name`='" . $feature . "'";
+      $result = mysql_query($sql);
+      
+      if(mysql_num_rows($result) > 0)
+      {
+          return true;
+      }
+      else{
+          return false;
+      }
+      
+  }
 
 }
 ?>
