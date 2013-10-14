@@ -28,7 +28,7 @@ $user = $this->getUser();
     <link href="http://dev.tinkermill.org/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://dev.tinkermill.org/css/backend.css" rel="stylesheet">
+    <link href="http://dev.tinkermill.org/css/site.css" rel="stylesheet">
 
     <script src="http://dev.tinkermill.org/bootstrap/assets/js/jquery.js"></script>
 
@@ -49,7 +49,7 @@ $user = $this->getUser();
     <div id="wrap">
 
       <!-- Fixed navbar -->
-      <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar navbar navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -57,45 +57,37 @@ $user = $this->getUser();
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><?php echo SITETITLE . " Backend"; ?></a>
+            <a class="navbar-brand" href="/tinker-man/"><?php echo SITETITLE . " Backend"; ?></a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="/">Calendar</a></li>
-              <li><a href="/">Forum</a></li>
-              <li><a href="/blog/">Blog</a></li>
-              <li><a href="/">Wiki</a></li>
-              <li><a href="/">Gallery</a></li>
-              <li><a href="/">Equipment</a></li>
-              <li><a href="/">Membership</a></li>
-              <li><a href="/">About</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-            <?php
-            if ($this->isUserLoggedIn()) { ?>
-              <li><a href="#">Cody B. Daig</a></li>
-            <?php } else {
+
+              <?php
+              // Retrieve all NavBar Items from the Database ORDER BY `Order`
+              $sql = "SELECT * FROM `navbar` WHERE `Location`='backend' ORDER BY `Parent`,`Order`";
+              $query = mysql_query($sql);
+
+              for ($i = 0; $i < mysql_num_rows($query); $i++) {
+              
+                echo "<li class='dropdown'>";
+                echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">' . '</a>';
+                echo "</li>";
+              }
               ?>
-              <li><a href="/login/">Please Login!</a></li>
             </ul>
-            <?php } ?>
-          </div><!--/.navbar-collapse -->
+              <ul class="nav navbar-nav navbar-right">
+                <?php if ($this->isUserLoggedIn()) { ?>
+                  <li><a href="#">Cody B. Daig</a></li>
+                <?php } else {
+                  ?>
+                  <li><a href="/login/">Please Login!</a></li>
+                </ul>
+              <?php } ?>
+          </div>
         </div>
       </div>
 
 
-      <!-- Begin page content -->
-      <div class="container">
+      <!--Begin page content-->
+      <div class = "container">
+

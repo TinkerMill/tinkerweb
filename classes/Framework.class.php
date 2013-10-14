@@ -52,6 +52,10 @@ class Framework {
     GLOBAL $user;
     return $user;
   }
+  
+  public function hasPermission($user, $level){
+    return true;
+  }
 
   // Display the Jumbotron Template Page with Content
   public function template_jumbotron($page) {

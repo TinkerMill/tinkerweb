@@ -31,7 +31,7 @@ if ($_SERVER["REDIRECT_URL"] != "") {
 }
 define(URL, $url);
 
-// Determine what is being requested
+// Determine if the backend is being requested
 $urlExploded = explode("/", $url);
 if ($urlExploded[1] == BACKEND) {
   // Set Backend to True
