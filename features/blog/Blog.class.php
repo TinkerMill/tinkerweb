@@ -98,13 +98,13 @@ class Blog extends Framework {
       $sql = "SELECT * FROM `blog_posts` WHERE `ID`='" . $id . "'";
       $post = mysql_query($post);
     }
-    echo '<form action="" method="post" class="form-inline" role="form">';
+    echo '<form action="" method="post" class="class="form-horizontal" role="form">';
     echo '<div class="form-group">';
-      echo '<label class="sr-only" for="exampleInputEmail2">Post Title</label>';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Post Title</label>';
       echo '<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Post Title">';
     echo '</div>';
     echo '<div class="form-group">';
-      echo '<label class="sr-only" for="exampleInputEmail2">Slug</label>';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Slug</label>';
       echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
     echo '</div>';
     echo '</form>';
