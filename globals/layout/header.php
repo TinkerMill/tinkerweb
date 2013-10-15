@@ -10,7 +10,8 @@
 
 ob_start();
 
-$user = $this->getUser();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +45,6 @@ $user = $this->getUser();
   </head>
 
   <body>
-
     <!-- Wrap all page content here -->
     <div id="wrap">
 
@@ -61,25 +61,59 @@ $user = $this->getUser();
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="/">Calendar</a></li>
-              <li><a href="/">Forum</a></li>
-              <li><a href="/blog/">Blog</a></li>
-              <li><a href="/">Wiki</a></li>
-              <li><a href="/">Gallery</a></li>
-              <li><a href="/">Equipment</a></li>
-              <li><a href="/">Membership</a></li>
-              <li><a href="/">About</a></li>
+
+              <?php
+              // Retrieve all NavBar Items from the Database ORDER BY `Order`
+              $sql = "SELECT * FROM `navbar` WHERE `Location`='frontend' ORDER BY `Parent`,`Order`";
+              $query = mysql_query($sql);
+              
+              $userPermissions = $this->getUserPermissions();
+
+              for ($i = 0; $i < mysql_num_rows($query); $i++) {
+                if (mysql_result($query, $i, "Parent") == 0) {
+                  if (mysql_result($query, $i, "Dropdown") == 1) {
+                    echo "<li class='dropdown'>";
+                    echo '<a href="' . mysql_result($query, $i, "Link") . '" class="dropdown-toggle" data-toggle="dropdown">' . mysql_result($query, $i, "Name") . '</a>';
+                    echo '<ul class="dropdown-menu">';
+                      for($x=0; $x<mysql_num_rows($query); $x++){
+                        if(mysql_result($query, $x, "Parent") == mysql_result($query, $i, "ID")){
+                          
+                          for($y=0; $y<mysql_num_rows($userPermissions); $y++){
+                            if(mysql_result($query, $x, "Permissions") == 0 || mysql_result($query, $x, "Permissions") == mysql_result($userPermissions, $y, "pID"))
+                            {
+                              echo '<l1><a href="' . mysql_result($query, $x, "Link") . '">' . mysql_result($query, $x, "Name") . '</a></li>';
+                              break;
+                            }
+                          }
+                        }
+                      }
+                    echo '</ul>';
+                    echo "</li>";
+                  } else {
+                    echo '<li><a href="' . mysql_result($query, $i, "Link") . '">' . mysql_result($query, $i, "Name") . '</a></li>';
+                  }
+                } else {
+                  break;
+                }
+              }
+              ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            <?php
-            if ($this->isUserLoggedIn()) { ?>
-              <li><a href="#">Cody B. Daig</a></li>
-            <?php } else {
-              ?>
-              <li><a href="/login/">Please Login!</a></li>
-            </ul>
-            <?php } ?>
+              <?php if ($this->isUserLoggedIn()) { 
+                $user = $this->getUser();
+                ?>
+                <li class='dropdown'>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user["Firstname"] . " " . $user["Lastname"]; ?></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Account Settings</a></li>
+                    <li><a href="/logout/">Logout</a></li>
+                  </ul>
+                </li>
+              <?php } else {
+                ?>
+                <li><a href="/login/">Login / Register</a></li>
+              </ul>
+              <?php } ?>
           </div><!--/.navbar-collapse -->
         </div>
       </div>

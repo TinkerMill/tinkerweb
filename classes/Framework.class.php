@@ -18,6 +18,7 @@ class Framework {
   public function __construct($page) {
     // This __construct() class loads a standard page.
     // Load the Header
+    $user = $this->user;
     $this->loadHeader();
 
     // Load the Content
@@ -218,6 +219,15 @@ class Framework {
     $location = $this->rootURL();
     header("Location: $location");
     die();
+  }
+  
+  public function getUserPermissions(){
+    GLOBAL $user;
+    
+    $sql = "SELECT * FROM `permissions_access` WHERE `uID`='" . $user["ID"] . "'";
+    $result = mysql_query($sql);
+    
+    return $result;
   }
 
 }
