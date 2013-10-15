@@ -6,7 +6,7 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 9th, 2013 
+ * Last Modified: October 14th, 2013 
  */
 
 class Framework {
@@ -201,7 +201,10 @@ class Framework {
   //    $featureID = the feature Name
   //    $permission = the feature permission name
   public function featureHasPermission($userID, $feature, $permission) {
-    $sql = "SELECT * FROM `permissions_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`ID` INNER JOIN `features` ON `permissions`.`featureID`=`features`.`ID` WHERE `features`.`Name`='" . $feature . "' AND `permissions_access`.`uID`='" . $userID . "' AND `permissions`.`featurePname`='" . $permission . "'";
+    $sql = "SELECT * FROM `permissions_access` INNER JOIN `permissions` ON `permissions_access`.`pID`=`permissions`.`ID` INNER JOIN `features` ON `permissions`.`featureID`=`features`.`ID` WHERE `features`.`Name`='" . $feature . "' AND `permissions_access`.`uID`='" . $userID . "'";
+    if($permission != "%"){
+      $sql .= "AND `permissions`.`featurePname`='" . $permission . "'";
+    }
     $result = mysql_query($sql);
 
     if (mysql_num_rows($result) > 0) {
@@ -209,6 +212,12 @@ class Framework {
     } else {
       return false;
     }
+  }
+  
+  public function forceHome(){
+    $location = $this->rootURL();
+    header("Location: $location");
+    die();
   }
 
 }

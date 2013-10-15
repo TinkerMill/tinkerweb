@@ -16,7 +16,7 @@ class Blog extends Framework {
   public $name = "Blog";
 
   public function __construct() {
-    if (BACKEND_ENABLED == true) {
+    if (BACKEND_ENABLED == true && parent::isUserLoggedIn()) {
       $this->constructBackend();
     } else {
       // Load the Website's Header
@@ -62,20 +62,36 @@ class Blog extends Framework {
 
   public function constructBackend() {
     GLOBAL $user;
-    GLOBAL $name;
+    // GLOBAL $name;
     $id = $user["ID"];
     $url = str_replace("/" . BACKEND, "", URL);
 
     // Load the Backend Header
     include_once("../globals/layout/backend_header.php");
-    
+
+    print parent::featureHasPermission($id, $name, "Admin");
+
     // Determine Requested Page
-    if ($url == "/blog/") {
-      // Load the Default Page
-      echo "<h1>Congrats! Your a Blog Admin.</h1>";
+    if ($url = "/blog/") {
+      if (parent::featureHasPermission($id, $this->name, "Admin")) {
+        // Load the Default Page
+        echo "<h1>Congrats! Your a Blog Admin.</h1>";
+      }
     } else if ($url == "/blog/new/") {
+      if (parent::featureHasPermission($id, $this->name, "NewPost")) {
       echo "<h1>Your Creating a New Blog Post.</h1>";
+    }}
+    else if (parent::featureHasPermission($id, $name, "%")) {
+      echo "Whoa.... Page Not Found.....";
     }
+    else
+    {
+      parent::forceHome();
+    }
+  }
+
+  public function backendDefaultPage() {
+    parent::loadBackendHeader();
   }
 
 }

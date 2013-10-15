@@ -5,7 +5,7 @@
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 10th, 2013 
+ * Last Modified: October 14th, 2013 
  */
 
 if($this->isUserLoggedIn())

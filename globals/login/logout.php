@@ -15,6 +15,7 @@ if($this->isUserLoggedIn())
   $sql = "UPDATE `users` SET `Hash`='Logged Out' WHERE `ID`='" . $user["ID"] . "'";
   mysql_query($sql);
 }
-$location = $this->rootURL();
-header("Location: $location");
+
+$this->forceHome();
+
 ?>
