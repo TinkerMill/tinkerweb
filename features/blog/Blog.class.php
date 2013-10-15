@@ -70,7 +70,7 @@ class Blog extends Framework {
     include_once("../globals/layout/backend_header.php");
 
     print parent::featureHasPermission($id, $name, "Admin");
-    echo $url;
+
     // Determine Requested Page
     if ($url == "/blog/") {
       if (parent::featureHasPermission($id, $this->name, "Admin")) {
@@ -105,6 +105,26 @@ class Blog extends Framework {
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Slug</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Author</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Category</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">DateTime</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Status</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Content</label>';
       echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
     echo '</div>';
     echo '</form>';
