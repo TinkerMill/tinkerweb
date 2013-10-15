@@ -70,9 +70,9 @@ class Blog extends Framework {
     include_once("../globals/layout/backend_header.php");
 
     print parent::featureHasPermission($id, $name, "Admin");
-
+    echo $url;
     // Determine Requested Page
-    if ($url = "/blog/") {
+    if ($url == "/blog/") {
       if (parent::featureHasPermission($id, $this->name, "Admin")) {
         // Load the Default Page
         echo "<h1>Congrats! Your a Blog Admin.</h1>";
@@ -80,7 +80,7 @@ class Blog extends Framework {
     } else if ($url == "/blog/new/") {
       if (parent::featureHasPermission($id, $this->name, "NewPost")) {
       echo "<h1>Create a New Blog Post</h1>";
-      postForm(0);
+      $this->postForm(0);
       
     }}
     else if (parent::featureHasPermission($id, $name, "%")) {
@@ -105,7 +105,7 @@ class Blog extends Framework {
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="sr-only" for="exampleInputEmail2">Slug</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
     echo '</div>';
     echo '</form>';
   }
