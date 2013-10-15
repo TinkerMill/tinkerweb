@@ -79,7 +79,9 @@ class Blog extends Framework {
       }
     } else if ($url == "/blog/new/") {
       if (parent::featureHasPermission($id, $this->name, "NewPost")) {
-      echo "<h1>Your Creating a New Blog Post.</h1>";
+      echo "<h1>Create a New Blog Post</h1>";
+      postForm(0);
+      
     }}
     else if (parent::featureHasPermission($id, $name, "%")) {
       echo "Whoa.... Page Not Found.....";
@@ -88,6 +90,24 @@ class Blog extends Framework {
     {
       parent::forceHome();
     }
+  }
+  
+  public function postForm($id){
+    if($id > 0)
+    {
+      $sql = "SELECT * FROM `blog_posts` WHERE `ID`='" . $id . "'";
+      $post = mysql_query($post);
+    }
+    echo '<form action="" method="post" class="form-inline" role="form">';
+    echo '<div class="form-group">';
+      echo '<label class="sr-only" for="exampleInputEmail2">Post Title</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Post Title">';
+    echo '</div>';
+    echo '<div class="form-group">';
+      echo '<label class="sr-only" for="exampleInputEmail2">Slug</label>';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="" placeholder="slug">';
+    echo '</div>';
+    echo '</form>';
   }
 
   public function backendDefaultPage() {
