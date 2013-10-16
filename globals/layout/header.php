@@ -106,7 +106,7 @@ ob_start();
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user["Firstname"] . " " . $user["Lastname"]; ?></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Account Settings</a></li>
-                    <li><a href="<?php echo BACKEND; ?>">Tinker-Man</a></li>
+                    <li><a href="<?php echo "/" . BACKEND . "/"; ?>">Tinker-Man</a></li>
                     <li><a href="/logout/">Logout</a></li>
                   </ul>
                 </li>
