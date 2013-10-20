@@ -7,4 +7,4 @@
 
 ?>
 
-<h1>Welcome to the TinkerMill backend!!</h1>
+<h1>Welcome to the TinkerMill backend!! This is the default backend page.</h1>
