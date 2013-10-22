@@ -65,6 +65,7 @@ class Blog extends Framework {
     // GLOBAL $name;
     $id = $user["ID"];
     $url = str_replace("/" . BACKEND, "", URL);
+    $url2 = explode("/", $url);
 
     // Load the Backend Header
     include_once("../globals/layout/backend_header.php");
@@ -83,6 +84,13 @@ class Blog extends Framework {
       $this->postForm(0);
       
     }}
+    else if($url2[1] == "blog" && $url2[2] == "edit"){
+        if (parent::featureHasPermission($id, $this->name, "NewPost")) {
+      echo "<h1>Edit a Blog Post</h1>";
+      $this->postForm($url2[3]);
+      
+    }
+    }
     else if (parent::featureHasPermission($id, $name, "%")) {
       echo "Whoa.... Page Not Found.....";
     }
@@ -96,36 +104,37 @@ class Blog extends Framework {
     if($id > 0)
     {
       $sql = "SELECT * FROM `blog_posts` WHERE `ID`='" . $id . "'";
-      $post = mysql_query($post);
+      $post_query = mysql_query($sql);
+      $post = mysql_fetch_array($post_query);
     }
     echo '<form action="" method="post" class="class="form-horizontal" role="form">';
     echo '<div class="form-group">';
-      echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Post Title</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" placeholder="Post Title">';
+      echo '<label class="col-lg-2 control-label" for="Title">Post Title</label>';
+      echo '<input type="text" class="form-control" id="Title" placeholder="Post Title" value="' . $post["Title"] . '">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Slug</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["Slug"] . '" placeholder="slug">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Author</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["Author"] . '" placeholder="slug">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Category</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["Category"] . '" placeholder="slug">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">DateTime</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["DateTime"] . '" placeholder="slug">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Status</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["Status"] . '" placeholder="slug">';
     echo '</div>';
     echo '<div class="form-group">';
       echo '<label class="col-lg-2 control-label" for="exampleInputEmail2">Content</label>';
-      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="sluggoeshere" placeholder="slug">';
+      echo '<input type="text" class="form-control" id="exampleInputEmail2" value="' . $post["Content"] . '" placeholder="slug">';
     echo '</div>';
     echo '</form>';
   }
