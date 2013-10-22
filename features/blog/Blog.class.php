@@ -1,11 +1,11 @@
 <?php
 /*
  * Blog Class
- * This file will ... 
+ * This file will handle anything to do with the blog Frontend and Backend!! 
  * 
  * @author Cody B. Daig
  * 
- * Last Modified: October 14th, 2013 
+ * Last Modified: October 21th, 2013 
  */
 
 // Include the Parent Framework Class
