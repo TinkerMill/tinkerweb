@@ -61,13 +61,13 @@ if ($mysqli->connect_errno) {
     $headerFile = "../" . $page["headerFile"];
     include($headerFile);
 
-        // Require the Class File
-        $classFile = "../" . $page["ClassFile"];
-        require_once($classFile);
-        // Initiate the Class
-        $class = new $page["ClassName"]();
-        // Call the Page Function
-        $class->$page["Function"]();
+    // Require the Class File
+    $classFile = "../" . $page["ClassFile"];
+    require_once($classFile);
+    // Initiate the Class
+    $class = new $page["ClassName"]();
+    // Call the Page Function
+    $class->$page["Function"]();
 
     // Include the Footer
     $footerFile = "../" . $page["footerFile"];
