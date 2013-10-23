@@ -1,6 +1,6 @@
-<?php/* 
+<?php
 
-
+/*
  * index.php
  * 
  * This is the heart of the website. Every page request (that is not an actual file on the server) 
@@ -13,4 +13,11 @@
 
 
 
+// Determine the page being requested
+$url = "/";
+if ($_SERVER["REDIRECT_URL"] != "") {
+$url = $_SERVER["REDIRECT_URL"];
+}
+
+print $url;
 ?>
