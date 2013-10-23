@@ -14,7 +14,6 @@
 // Require the Config and Vars files
 require_once("../globals/config/config.php");
 // require_once("../globals/config/vars.php");
-
 // Create MySql Connection
 $con = mysqli_connect($SQLHOST, $SQLUSER, $SQLPASS, $SQLDB);
 
@@ -32,22 +31,17 @@ if ($_SERVER["REDIRECT_URL"] != "") {
 
 // See if the Page exists in the Database
 $sql = "SELECT * FROM `pages` WHERE `URL`='" . $url . "'";
-$result = mysqli_query($con,$sql);
-if ($mysqli->connect_errno)
-{
+$result = mysqli_query($con, $sql);
+if ($mysqli->connect_errno) {
     // Something Happened
     echo "Failed to Query the Database. Please try again later, or contact webmaster@tinkermill.org";
     die();
-}
-else if(mysqli_num_rows($result)>0)
-{
+} else if (mysqli_num_rows($result) > 0) {
     $page = mysqli_fetch_array($result);
-}
- else {
+} else {
     // No Page Was Found, Load the 404 page
- }
+}
 
 // Close the Database Connection
 mysqli_close($con);
-
 ?>
