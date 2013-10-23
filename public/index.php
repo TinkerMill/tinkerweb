@@ -39,6 +39,26 @@ if ($mysqli->connect_errno) {
 } else if (mysqli_num_rows($result)>0) {
     $page = mysqli_fetch_array($result);
     
+    $pID = $page["pID"];
+    $hash = "hash1234";
+    if($pID != 0){
+        $sql = "SELECT * FROM users";
+        if($pID > 0){
+            $sql .= " INNER JOIN permissions_access ON users.ID=permissions_access.uID";
+        }
+        $sql .= " WHERE users.Hash='" . $hash . "'";
+        if($pID > 0){
+            $sql .= " AND permissions_access.pID=$pID";
+        }
+        $permission = mysqli_query($con, $sql);
+        if(mysqli_num_rows($permission)<=0){
+            // Permission Denied
+            die("Permission Denied");
+        }
+    }
+    
+    // Include the Header
+    
     // Require the Class File
     $classFile = "../" . $page["ClassFile"];
     require_once($classFile);
@@ -46,6 +66,8 @@ if ($mysqli->connect_errno) {
     $class = new $page["ClassName"]();
     // Call the Page Function
     $class->$page["Function"]();
+    
+    // Include the Footer
 } else {
     // No Page Was Found, Load the 404 page
 }
